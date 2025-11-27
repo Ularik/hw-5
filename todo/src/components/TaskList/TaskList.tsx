@@ -1,0 +1,53 @@
+import React, { useState } from "react";
+import Task from "../Task/Task";
+import CreateTaskForm from "../CreateTaskForm/CreateTaskForm";
+
+interface Task {
+  taskText: string;
+  id: number;
+}
+
+export interface TaskLite {
+  taskText: string;
+}
+
+const TaskList = () => {
+    const [taskItems, setTaskItems] = useState<Task[]>([
+      { taskText: "I am Groott!", id: 1 },
+      { taskText: "I am Groott!", id: 2 },
+      { taskText: "Hello bro, I am Draks!", id: 3 },
+    ]);
+
+    const addTask = (taskObj: TaskLite) => {
+      const maxId = taskItems.length > 0
+        ? Math.max(...taskItems.map((task) => task.id))
+        : 0;
+
+      setTaskItems([{ ...taskObj, id: maxId + 1 }, ...taskItems]);
+    };
+
+    const delTask = (id: number) => {
+      setTaskItems(taskItems.filter((task) => task.id !== id));
+    }
+
+    return (
+      <div className="w-2xl mx-auto">
+        <div className="w-2xl mx-auto fixed top-7">
+          <div className="mb-7">
+            <CreateTaskForm addTask={addTask} />
+          </div>
+          <div className="">
+            {taskItems.map((taskObj) => (
+              <Task
+                delFunc={() => delTask(taskObj.id)}
+                key={taskObj.id}
+                text={taskObj.taskText}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+}
+
+export default TaskList;
