@@ -5,17 +5,19 @@ import CreateTaskForm from "../CreateTaskForm/CreateTaskForm";
 interface Task {
   taskText: string;
   id: number;
+  isDone: boolean;
 }
 
 export interface TaskLite {
   taskText: string;
+  isDone: boolean;
 }
 
 const TaskList = () => {
     const [taskItems, setTaskItems] = useState<Task[]>([
-      { taskText: "I am Groott!", id: 1 },
-      { taskText: "I am Groott!", id: 2 },
-      { taskText: "Hello bro, I am Draks!", id: 3 },
+      { taskText: "I am Groott!", id: 1, isDone: false },
+      { taskText: "I am Groott!", id: 2, isDone: false },
+      { taskText: "Hello bro, I am Draks!", id: 3, isDone: true },
     ]);
 
     const addTask = (taskObj: TaskLite) => {
@@ -42,6 +44,7 @@ const TaskList = () => {
                 delFunc={() => delTask(taskObj.id)}
                 key={taskObj.id}
                 text={taskObj.taskText}
+                isDone={taskObj.isDone}
               />
             ))}
           </div>
