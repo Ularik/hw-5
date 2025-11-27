@@ -33,12 +33,12 @@ const TaskList = () => {
     }
 
     return (
-      <div className="w-2xl mx-auto">
-        <div className="w-2xl mx-auto fixed top-7">
+      <div className="bg-sky-100 h-screen">
+        <div className="w-2xl mx-auto py-7">
           <div className="mb-7">
             <CreateTaskForm addTask={addTask} />
           </div>
-          <div className="">
+          <div className="flex flex-col gap-4">
             {taskItems.map((taskObj) => (
               <Task
                 delFunc={() => delTask(taskObj.id)}

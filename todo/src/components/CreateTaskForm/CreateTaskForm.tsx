@@ -7,7 +7,8 @@ interface CreateProps extends React.PropsWithChildren {
 }
 
 const formPattern = {
-  taskText: ''
+  taskText: '',
+  isDone: false
 }
 
 const CreateTaskForm: React.FC<CreateProps> = ({addTask}) => {
@@ -19,7 +20,6 @@ const CreateTaskForm: React.FC<CreateProps> = ({addTask}) => {
       ...form,
       [name]: value,
     });
-    console.log(form);
   }
 
   const sendTask = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,16 +33,19 @@ const CreateTaskForm: React.FC<CreateProps> = ({addTask}) => {
       onSubmit={sendTask}
       className="grid gap-3 grid-cols-[minmax(400px,_1fr)_100px]"
     >
-      <div className="">
+      <div>
         <input
-          className="w-full p-2 rounded-md border-0 shadow-sm outline-none"
+          className="w-full p-2 rounded-md border-0 shadow-sm outline-none bg-gray-50"
           type="text"
           name="taskText"
           onChange={changeText}
           value={form.taskText}
         />
       </div>
-      <button type="submit" className="shadow-sm rounded-md p-1 cursor-pointer">
+      <button
+        type="submit"
+        className="shadow-sm rounded-md p-1 cursor-pointer bg-gray-50"
+      >
         Add
       </button>
     </form>
